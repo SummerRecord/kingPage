@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>关于</title>
+    <meta name="description" content="插画与立体书作者简介。">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
+  </head>
+  <body data-page="about">
+    <span class="crop crop-tl"></span>
+    <span class="crop crop-tr"></span>
+    <span class="crop crop-bl"></span>
+    <span class="crop crop-br"></span>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="brand" href="index.html">
+          <span class="seal">紙</span>
+          <span class="brand-text">
+            <span class="brand-name" data-brand-name></span>
+            <span class="brand-tag" data-brand-tag></span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="主导航">
+          <a href="index.html">首页</a>
+          <a href="works.html">插画</a>
+          <a href="books.html">立体书</a>
+          <a href="about.html">关于</a>
+          <a href="contact.html">联系</a>
+        </nav>
+      </header>
+
+      <div class="kicker">
+        <h2>关于</h2>
+        <span>About</span>
+      </div>
+      <div class="prose">
+        <p id="about-zh"></p>
+        <p id="about-en"></p>
+        <p class="meta" id="about-city"></p>
+        <p>写信：<a data-email></a></p>
+      </div>
+
+      <footer class="site-footer">
+        <span>About the studio</span>
+        <a href="contact.html">下一页 · 联系</a>
+      </footer>
+    </div>
+    <script src="js/config.js"></script>
+    <script src="js/site.js"></script>
+    <script>
+      (function () {
+        var site = window.SITE || {};
+        var zh = document.getElementById("about-zh");
+        var en = document.getElementById("about-en");
+        var city = document.getElementById("about-city");
+        if (zh) zh.textContent = site.about || "";
+        if (en) en.textContent = site.aboutEn || "";
+        if (city) city.textContent = site.city || "";
+      })();
+    </script>
+  </body>
+</html>

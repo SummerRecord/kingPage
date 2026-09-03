@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>插画与立体书 · 样稿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --room: #120e0c;
+  --room-2: #1b1410;
+  --page: #f3e6d0;
+  --page-2: #e8d4b4;
+  --ink: #f3e6d0;
+  --ink-soft: #b9a48a;
+  --leather: #6e2a22;
+  --spine: #3a2018;
+  --gilt: #d7b07a;
+  --wash: #6a8fa3;
+  --mat: #2f5d4a;
+  --shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+  --display: "Instrument Serif", "Noto Serif SC", serif;
+  --body: "Noto Serif SC", "Instrument Serif", serif;
+  --mark: "Noto Sans SC", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 18%, #3a2a1c 0%, var(--room) 58%);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.16;
+}
+
+.crop { display: none; }
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+a:hover { color: var(--gilt); }
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0 16px;
+  background: linear-gradient(180deg, rgba(18, 14, 12, 0.96), rgba(18, 14, 12, 0.55) 70%, transparent);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.seal {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gilt);
+  color: var(--gilt);
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 22px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-name {
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.brand-tag,
+.nav,
+.kicker span,
+.meta,
+.field span,
+.site-footer,
+.card-meta small,
+.layer-tab {
+  font-family: var(--mark);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+
+.nav a { text-decoration: none; color: var(--ink-soft); }
+
+.nav a[aria-current="page"],
+.nav a:hover {
+  color: var(--page);
+}
+
+.hero {
+  position: relative;
+  min-height: min(80vh, 780px);
+  margin: 8px 0 72px;
+  perspective: 1600px;
+}
+
+.stage {
+  position: relative;
+  height: min(80vh, 780px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 72%, #5a3a22 0%, #120e0c 58%);
+  cursor: pointer;
+}
+
+.tome {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(340px, 56vw);
+  height: min(460px, 62vh);
+  transform: translate(-46%, -50%) rotateY(-18deg) rotate(-8deg);
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow);
+}
+
+.spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  background: linear-gradient(90deg, #24140f, var(--spine) 40%, #5a2a20);
+}
+
+.cover-front {
+  position: absolute;
+  inset: 0 0 0 28px;
+  background:
+    linear-gradient(180deg, rgba(215, 176, 122, 0.18), transparent 30%),
+    linear-gradient(160deg, #8b3a2a, #4a1c16);
+  box-shadow: inset 0 0 0 1px rgba(215, 176, 122, 0.35);
+}
+
+.cover-front::after {
+  content: "绔嬮珨鏇?;
+  position: absolute;
+  left: 18px;
+  bottom: 22px;
+  font-family: var(--display);
+  font-size: 28px;
+  color: var(--gilt);
+}
+
+.spread {
+  position: absolute;
+  inset: 8% 8% 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
+  transition: opacity 500ms ease, transform 700ms ease;
+}
+
+.page {
+  background: var(--page);
+  color: #2c1810;
+}
+
+.page-left {
+  box-shadow: inset -12px 0 16px rgba(44, 24, 16, 0.08);
+  padding: 22px 18px;
+}
+
+.page-right {
+  position: relative;
+  overflow: hidden;
+  background: #e7d3b0;
+}
+
+.pop-sky,
+.pop-mid,
+.pop-front {
+  position: absolute;
+  inset: 0;
+}
+
+.pop-sky { background: linear-gradient(#6a8fa3, #c9b07a); }
+.pop-mid {
+  top: 28%;
+  background: #2f5d4a;
+  clip-path: polygon(0 40%, 30% 18%, 62% 36%, 100% 12%, 100% 100%, 0 100%);
+}
+.pop-front {
+  top: 48%;
+  background: #8b3a2a;
+  clip-path: polygon(0 60%, 28% 28%, 58% 50%, 100% 20%, 100% 100%, 0 100%);
+}
+
+.stage.is-open .tome {
+  width: min(720px, 86vw);
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.stage.is-open .spine,
+.stage.is-open .cover-front {
+  opacity: 0;
+}
+
+.stage.is-open .spread {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.layer-tab {
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  padding: 8px 10px;
+  background: var(--page);
+  color: #2c1810;
+  writing-mode: vertical-rl;
+}
+
+.hero-copy {
+  position: absolute;
+  left: 36px;
+  bottom: 36px;
+  z-index: 3;
+  max-width: 16em;
+  color: var(--page);
+}
+
+.hero-copy h1 {
+  margin: 0 0 10px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.95;
+}
+
+.hero-copy p {
+  margin: 0;
+  font-size: 14px;
+  max-width: 22em;
+  color: var(--ink-soft);
+}
+
+.kicker {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin: 0 0 22px;
+}
+
+.kicker h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  color: var(--page);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  min-height: 280px;
+  background: var(--page);
+  color: #2c1810;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 280ms ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  color: #2c1810;
+}
+
+.swatch {
+  flex: 1;
+  min-height: 210px;
+  position: relative;
+}
+
+.swatch::after {
+  content: "浣滃搧鍗犱綅";
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--mark);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(243, 226, 184, 0.8);
+}
+
+.card.has-image .swatch::after { display: none; }
+
+.card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.tone-cinnabar { background: linear-gradient(160deg, #8b3a2a, #4a1c16); }
+.tone-mat { background: linear-gradient(160deg, #3d6b5a, #1d3d31); }
+.tone-wash { background: linear-gradient(160deg, #6a8fa3, #355468); }
+.tone-foil { background: linear-gradient(160deg, #d4b36a, #8a6a2c); }
+.tone-ink { background: linear-gradient(160deg, #4a2a1c, #2c1810); }
+.tone-paper { background: linear-gradient(160deg, #f0ddb4, #c9a46a); }
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px 14px;
+  font-size: 14px;
+}
+
+.card-meta small { color: #7a5f48; }
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.book {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  padding: 22px;
+  background: rgba(243, 230, 208, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(215, 176, 122, 0.22);
+}
+
+.book-cover {
+  min-height: 340px;
+  background: var(--leather);
+  position: relative;
+  overflow: hidden;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.peek {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 160px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.peek-plane {
+  min-height: 160px;
+  transition: transform 500ms ease;
+}
+
+.peek-plane:nth-child(1) { background: #6a8fa3; }
+.peek-plane:nth-child(2) { background: #2f5d4a; }
+.peek-plane:nth-child(3) { background: #8b3a2a; }
+
+.peek.is-open .peek-plane:nth-child(1) { transform: translateX(-8px) rotate(-2deg); }
+.peek.is-open .peek-plane:nth-child(2) { transform: translateY(-10px); }
+.peek.is-open .peek-plane:nth-child(3) { transform: translateX(8px) rotate(2deg); }
+
+.book h3 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.prose { max-width: 40em; }
+.prose p { margin: 0 0 1em; }
+
+.contact-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--gilt);
+  background: transparent;
+  color: var(--page);
+  font: inherit;
+  padding: 8px 0;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--gilt);
+  outline-offset: 4px;
+}
+
+button,
+.btn {
+  appearance: none;
+  border: 0;
+  background: var(--page);
+  color: #2c1810;
+  font-family: var(--mark);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+button:hover,
+.btn:hover { background: var(--gilt); }
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 80px 0 28px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(215, 176, 122, 0.22);
+}
+
+.note {
+  margin: 0 0 28px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--gilt);
+  background: rgba(243, 230, 208, 0.08);
+  font-size: 14px;
+}
+
+@media (max-width: 860px) {
+  .wrap { width: min(100% - 28px, 1180px); }
+  .site-header { flex-direction: column; align-items: flex-start; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .book,
+  .contact-block { grid-template-columns: 1fr; }
+  .hero-copy { left: 18px; bottom: 18px; }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after { transition: none !important; }
+}
+
+section { scroll-margin-top: 80px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site-header">
+  <a class="brand" href="#top">
+    <span class="seal">紙</span>
+    <span class="brand-text">
+      <span class="brand-name">紙戲</span>
+      <span class="brand-tag">插画与立体书</span>
+    </span>
+  </a>
+  <nav class="nav" aria-label="主导航">
+    <a href="#top">首页</a>
+    <a href="#works">插画</a>
+    <a href="#books">立体书</a>
+    <a href="#about">关于</a>
+  </nav>
+</header>
+
+<section class="hero" id="top" aria-label="立体书舞台">
+  <div class="stage" data-stage tabindex="0" role="button" aria-label="掀开这本书">
+    <div class="tome">
+      <div class="spine"></div>
+      <div class="cover-front"></div>
+      <div class="spread">
+        <div class="page page-left">点开封面，内页会自己站起来。</div>
+        <div class="page page-right">
+          <i class="pop-sky"></i>
+          <i class="pop-mid"></i>
+          <i class="pop-front"></i>
+        </div>
+      </div>
+    </div>
+    <span class="layer-tab">掀开 · Peek</span>
+    <div class="hero-copy">
+      <h1>纸会站起来。</h1>
+      <p>这是一份样稿。点一下那本书，看它打开成跨页。作品图还是色块，以后换成你的原作。</p>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="kicker"><h2>选作</h2><span>Illustration</span></div>
+  <div class="grid">
+    <article class="card"><div class="swatch tone-cinnabar"></div><div class="card-meta"><span>夜市灯笼</span><small>插画 · 2025</small></div></article>
+    <article class="card"><div class="swatch tone-mat"></div><div class="card-meta"><span>折进口袋的山</span><small>插画 · 2025</small></div></article>
+    <article class="card"><div class="swatch tone-wash"></div><div class="card-meta"><span>青瓷与猫</span><small>插画 · 2024</small></div></article>
+    <article class="card"><div class="swatch tone-foil"></div><div class="card-meta"><span>雨天的信</span><small>插画 · 2024</small></div></article>
+    <article class="card"><div class="swatch tone-ink"></div><div class="card-meta"><span>厨房里的月亮</span><small>插画 · 2024</small></div></article>
+    <article class="card"><div class="swatch tone-paper"></div><div class="card-meta"><span>一盒纽扣</span><small>插画 · 2023</small></div></article>
+  </div>
+</section>
+
+<section id="books" style="margin-top:72px">
+  <div class="kicker"><h2>立体书</h2><span>Pop-up</span></div>
+  <div class="book-list">
+    <article class="book"><div class="book-cover tone-mat"></div><div><p class="meta">制作中 · 2026</p><h3>抽屉里的森林</h3><p>拉开抽屉，树从纸里站起来。</p><div class="peek" data-peek tabindex="0" role="button" aria-label="掀开内页"><div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div></div><p class="meta">点色块，看三层纸错开</p></div></article>
+    <article class="book"><div class="book-cover tone-cinnabar"></div><div><p class="meta">立体书 · 2025</p><h3>会呼吸的房子</h3><p>门、窗、楼梯是三层纸。掀开后，房间自己亮起来。</p><div class="peek" data-peek tabindex="0" role="button" aria-label="掀开内页"><div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div></div><p class="meta">点色块，看三层纸错开</p></div></article>
+    <article class="book"><div class="book-cover tone-wash"></div><div><p class="meta">立体书 · 2024</p><h3>月亮邮局</h3><p>信封展开就是一条小路。邮票是可以撕下来的小机关。</p><div class="peek" data-peek tabindex="0" role="button" aria-label="掀开内页"><div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div></div><p class="meta">点色块，看三层纸错开</p></div></article>
+  </div>
+</section>
+
+<section id="about" style="margin-top:72px">
+  <div class="kicker"><h2>关于</h2><span>About</span></div>
+  <div class="prose">
+    <p>她画图，也做会站起来的书。纸被切开、折起，一层一层叠进一个小舞台。</p>
+    <p>这是样稿。姓名、简介、作品图都可以换成你的。</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>Illustration · Pop-up · Paper theatre</span>
+  <span>单页样稿 · 发给你先看气质</span>
+</footer>
+</div>
+<script>
+(function () {
+  var stage = document.querySelector("[data-stage]");
+  if (stage) {
+    var toggle = function () { stage.classList.toggle("is-open"); };
+    stage.addEventListener("click", toggle);
+    stage.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  }
+  document.querySelectorAll("[data-peek]").forEach(function (peek) {
+    var toggle = function () { peek.classList.toggle("is-open"); };
+    peek.addEventListener("click", toggle);
+    peek.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

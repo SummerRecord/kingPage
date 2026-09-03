@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>风格选择 · 插画与立体书</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&family=Syne:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --ink: #1c1916;
+        --muted: #6b6358;
+        --line: #d8d0c4;
+        --bg: #f6f1e8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.6 "Noto Sans SC", sans-serif;
+      }
+      .intro {
+        width: min(1080px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 48px 0 20px;
+      }
+      .intro h1 {
+        margin: 0 0 8px;
+        font: 500 36px/1.15 "Noto Serif SC", serif;
+      }
+      .intro p { margin: 0 0 10px; color: var(--muted); max-width: 46em; }
+      .refs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        margin: 18px 0 8px;
+        font-size: 13px;
+      }
+      .refs a { color: inherit; }
+      .board {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto 80px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+      }
+      .choice {
+        background: #fff;
+        border: 1px solid var(--line);
+        padding: 14px;
+      }
+      .choice header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+      .choice h2 {
+        margin: 0;
+        font: 600 18px/1.3 "Noto Serif SC", serif;
+      }
+      .choice .meta {
+        font: 11px/1.3 "IBM Plex Mono", monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .choice p.why {
+        margin: 0 0 12px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .frame {
+        height: 340px;
+        overflow: hidden;
+        position: relative;
+      }
+      .mini {
+        height: 100%;
+        padding: 16px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mini nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+      }
+      .mini nav span.links { display: flex; gap: 10px; }
+      .stage {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        min-height: 0;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        height: 56px;
+      }
+      .row i { display: block; height: 100%; }
+      .pick {
+        margin-top: 12px;
+        width: 100%;
+        border: 1px solid var(--ink);
+        background: transparent;
+        padding: 8px 10px;
+        font: 13px/1 "Noto Sans SC", sans-serif;
+        cursor: pointer;
+      }
+      .pick:hover, .choice.is-on .pick {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      /* 1 紙戲工房 — current */
+      .t-paper { background: #e8cf9a; color: #2c1810; font-family: "Newsreader", "Noto Serif SC", serif; }
+      .t-paper .seal { width: 22px; height: 22px; border: 1px solid #c23b22; color: #c23b22; display: grid; place-items: center; }
+      .t-paper .stage { background: #1d3d31; }
+      .t-paper .sky { position: absolute; inset: 0; background: linear-gradient(#6a8fa3, #c9b07a); }
+      .t-paper .mid { position: absolute; inset: 28% 0 0; background: #2f5d4a; clip-path: polygon(0 40%, 30% 22%, 58% 38%, 100% 16%, 100% 100%, 0 100%); }
+      .t-paper .front { position: absolute; inset: 48% 0 0; background: #c23b22; clip-path: polygon(0 62%, 26% 30%, 55% 52%, 100% 22%, 100% 100%, 0 100%); }
+      .t-paper .copy { position: absolute; left: 12px; bottom: 10px; color: #f0ddb4; font-size: 22px; }
+      .t-paper .row i:nth-child(1) { background: #c23b22; }
+      .t-paper .row i:nth-child(2) { background: #2f5d4a; }
+      .t-paper .row i:nth-child(3) { background: #6a8fa3; }
+
+      /* 2 白牆畫廊 — JooHee */
+      .t-gallery { background: #fff; color: #111; font-family: "Noto Sans SC", sans-serif; }
+      .t-gallery nav { font-size: 9px; letter-spacing: 0.22em; text-transform: lowercase; color: #444; }
+      .t-gallery .stage { background: #f3f1ec; display: grid; place-items: center; }
+      .t-gallery .art {
+        width: 72%;
+        height: 78%;
+        background:
+          linear-gradient(120deg, #d9c7a2 0 40%, transparent 41%),
+          linear-gradient(200deg, #6b8f7a, #2a4034);
+      }
+      .t-gallery .row { height: 48px; gap: 14px; }
+      .t-gallery .row i { background: #ece8e1; }
+
+      /* 3 繪本桌 — Samantha */
+      .t-book { background: #fff8ef; color: #3a2a22; font-family: "Instrument Serif", "Noto Serif SC", serif; }
+      .t-book nav { font-family: "Noto Sans SC", sans-serif; letter-spacing: 0.08em; }
+      .t-book .word { font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase; }
+      .t-book .stage { background: #f3d7c4; display: grid; grid-template-columns: 1.1fr 1fr; }
+      .t-book .cover { background: #7a3b4a; margin: 16px; box-shadow: 8px 8px 0 #e8b89a; }
+      .t-book .peek-copy { padding: 22px 12px 0 0; font-size: 20px; }
+      .t-book .row i { background: #e8b89a; }
+      .t-book .row i:nth-child(2) { background: #7a3b4a; }
+
+      /* 4 夜燈看稿 */
+      .t-night { background: #1a1410; color: #e6d3b0; font-family: "Bodoni Moda", "Noto Serif SC", serif; }
+      .t-night nav { font-family: "IBM Plex Mono", monospace; color: #c4a15a; }
+      .t-night .stage {
+        background: radial-gradient(circle at 50% 40%, #3a2a18 0%, #120e0b 72%);
+        display: grid;
+        place-items: center;
+      }
+      .t-night .slide {
+        width: 58%;
+        height: 70%;
+        background: linear-gradient(160deg, #c45c2a, #6a1f14 55%, #1d3d31);
+        box-shadow: 0 0 40px rgba(196, 92, 42, 0.45);
+      }
+      .t-night .row i { background: #2a2118; box-shadow: inset 0 0 0 1px #c4a15a; }
+
+      /* 5 藍圖紙樣 */
+      .t-cyan { background: #0e3a4a; color: #d7f1f4; font-family: "IBM Plex Mono", "Noto Sans SC", monospace; }
+      .t-cyan nav { letter-spacing: 0.16em; text-transform: uppercase; }
+      .t-cyan .stage {
+        background:
+          linear-gradient(rgba(215, 241, 244, 0.08) 1px, transparent 1px) 0 0 / 16px 16px,
+          linear-gradient(90deg, rgba(215, 241, 244, 0.08) 1px, transparent 1px) 0 0 / 16px 16px,
+          #125066;
+      }
+      .t-cyan .fold {
+        position: absolute;
+        inset: 18px;
+        border: 1px dashed #9ad4dc;
+      }
+      .t-cyan .fold::before {
+        content: "LAYER A / B / C";
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        font-size: 10px;
+      }
+      .t-cyan .row i { background: #9ad4dc; opacity: 0.35; }
+      .t-cyan .row i:nth-child(2) { opacity: 0.7; }
+
+      /* 6 剪紙戲台 */
+      .t-cut { background: #f6e7c3; color: #2a0e0a; font-family: "Syne", "Noto Sans SC", sans-serif; }
+      .t-cut nav { font-weight: 700; }
+      .t-cut .stage { background: #8b1e1e; }
+      .t-cut .cut-a, .t-cut .cut-b, .t-cut .cut-c { position: absolute; left: 0; right: 0; }
+      .t-cut .cut-a { top: 0; height: 38%; background: #f2c14e; clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 30% 70%, 0 100%); }
+      .t-cut .cut-b { top: 28%; height: 46%; background: #1f4d3a; clip-path: polygon(0 30%, 18% 0, 40% 28%, 62% 0, 82% 26%, 100% 8%, 100% 100%, 0 100%); }
+      .t-cut .cut-c { bottom: 0; height: 38%; background: #1a1a1a; clip-path: polygon(0 40%, 25% 0, 50% 36%, 75% 0, 100% 40%, 100% 100%, 0 100%); }
+      .t-cut .row i:nth-child(1) { background: #8b1e1e; }
+      .t-cut .row i:nth-child(2) { background: #1f4d3a; }
+      .t-cut .row i:nth-child(3) { background: #f2c14e; }
+
+      .section-label {
+        width: min(1180px, calc(100% - 40px));
+        margin: 8px auto 16px;
+        font: 500 22px/1.3 "Noto Serif SC", serif;
+      }
+      .section-note {
+        width: min(1180px, calc(100% - 40px));
+        margin: -8px auto 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* 7 Book Hero 气质 */
+      .t-ms-book { background: #1b1410; color: #f3e6d0; font-family: "Instrument Serif", "Noto Serif SC", serif; }
+      .t-ms-book nav { font-family: "Noto Sans SC", sans-serif; letter-spacing: 0.14em; text-transform: uppercase; }
+      .t-ms-book .stage { display: grid; place-items: center; background: radial-gradient(circle at 50% 80%, #5a3a22, #120e0c); }
+      .t-ms-book .tome {
+        width: 46%;
+        height: 78%;
+        background: linear-gradient(90deg, #3a2018 0 8%, #8b3a2a 8% 12%, #d7b07a 12%);
+        box-shadow: 18px 18px 0 rgba(0, 0, 0, 0.35);
+        transform: rotate(-8deg);
+      }
+      .t-ms-book .row i { background: #3a2018; }
+      .t-ms-book .row i:nth-child(2) { background: #d7b07a; }
+
+      /* 8 Dreamcore */
+      .t-ms-dream { background: #ebe4f4; color: #3b2a44; font-family: "Newsreader", "Noto Serif SC", serif; }
+      .t-ms-dream nav { font-family: "Noto Sans SC", sans-serif; }
+      .t-ms-dream .stage {
+        background:
+          radial-gradient(circle at 30% 40%, rgba(255, 190, 210, 0.7), transparent 42%),
+          radial-gradient(circle at 70% 60%, rgba(170, 200, 255, 0.65), transparent 46%),
+          #c9b8d8;
+      }
+      .t-ms-dream .orb {
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.45);
+        filter: blur(0.4px);
+        left: 38%;
+        top: 28%;
+      }
+      .t-ms-dream .row i { background: #d7c6e6; }
+
+      /* 9 3D Story / Layered Depth */
+      .t-ms-story { background: #0c0c10; color: #f2efe8; font-family: "Syne", "Noto Sans SC", sans-serif; }
+      .t-ms-story nav { letter-spacing: 0.16em; text-transform: uppercase; font-size: 9px; }
+      .t-ms-story .stage { background: #15151c; }
+      .t-ms-story .p1, .t-ms-story .p2, .t-ms-story .p3 {
+        position: absolute; left: 12%; right: 12%; height: 42%;
+        border-radius: 10px;
+      }
+      .t-ms-story .p1 { top: 12%; background: #6a8fa3; transform: scale(0.86); opacity: 0.45; }
+      .t-ms-story .p2 { top: 22%; background: #2f5d4a; transform: scale(0.93); opacity: 0.7; }
+      .t-ms-story .p3 { top: 34%; background: linear-gradient(160deg, #c45c2a, #6a1f14); }
+      .t-ms-story .row i { background: #2a2a33; }
+
+      /* 10 Golden Portal */
+      .t-ms-gold { background: #100c08; color: #f0d48a; font-family: "Bodoni Moda", "Noto Serif SC", serif; }
+      .t-ms-gold nav { font-family: "IBM Plex Mono", monospace; }
+      .t-ms-gold .stage { background: radial-gradient(ellipse at 50% 70%, #6a4a18, #100c08 68%); display: grid; place-items: center; }
+      .t-ms-gold .arch {
+        width: 42%;
+        height: 78%;
+        border: 2px solid #e6c36a;
+        border-bottom: 0;
+        border-radius: 160px 160px 0 0;
+        box-shadow: 0 0 40px rgba(230, 195, 106, 0.25);
+      }
+      .t-ms-gold .row i { background: #3a2a10; box-shadow: inset 0 0 0 1px #e6c36a; }
+
+      /* 11 Ember editorial */
+      .t-ms-ember { background: #f4eee6; color: #1a1a1a; font-family: "Syne", "Noto Sans SC", sans-serif; }
+      .t-ms-ember nav { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+      .t-ms-ember .stage { background: #1a1a1a; color: #f4eee6; display: flex; align-items: flex-end; padding: 14px; }
+      .t-ms-ember .big { font-size: 28px; line-height: 0.9; letter-spacing: -0.04em; }
+      .t-ms-ember .row i { background: #1a1a1a; }
+      .t-ms-ember .row i:nth-child(2) { background: #c45c2a; }
+
+      @media (max-width: 860px) {
+        .board { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="intro">
+      <h1>先选一套前端风格</h1>
+      <p>上次那两个站，我主要借了<strong>栏目怎么排</strong>，不是借它们的样子。视觉我自己定成了「紙戲工房」一稿，没有先给你选。下面六套都是为插画 + 立体书想的，点「用这套」告诉我编号即可。</p>
+      <div class="refs">
+        <span>结构参考：</span>
+        <a href="https://jooheeyoon.com/index.html">jooheeyoon.com</a>
+        <a href="https://www.samanthacotterill.com">samanthacotterill.com</a>
+        <a href="https://motionsites.ai/">motionsites.ai</a>
+      </div>
+    </div>
+
+    <div class="board">
+      <article class="choice" data-style="paper">
+        <header>
+          <h2>1 · 紙戲工房</h2>
+          <span class="meta">现在线上这套</span>
+        </header>
+        <p class="why">印刷工房：牛皮纸、套准十字、朱红印章。签名动作是三层纸掀开。和两个参考站都不像，是为立体书新造的。</p>
+        <div class="frame">
+          <div class="mini t-paper">
+            <nav><b class="seal">紙</b><span class="links"><span>插画</span><span>立体书</span><span>关于</span></span></nav>
+            <div class="stage"><i class="sky"></i><i class="mid"></i><i class="front"></i><div class="copy">纸会站起来。</div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="gallery">
+        <header>
+          <h2>2 · 白牆畫廊</h2>
+          <span class="meta">更像 JooHee</span>
+        </header>
+        <p class="why">白墙、小字导航、作品几乎铺满。站点自己退后，让原作说话。适合作品已经很强、不想被设计抢走视线。</p>
+        <div class="frame">
+          <div class="mini t-gallery">
+            <nav><span>name</span><span class="links"><span>illustration</span><span>books</span><span>about</span></span></nav>
+            <div class="stage"><div class="art"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="book">
+        <header>
+          <h2>3 · 繪本桌</h2>
+          <span class="meta">更像 Samantha</span>
+        </header>
+        <p class="why">书名、封面、掀开内页是第一件事。暖、亲近、像童书作者主页。适合立体书和绘本已经成系列。</p>
+        <div class="frame">
+          <div class="mini t-book">
+            <nav><span class="word">Studio</span><span class="links"><span>Books</span><span>Portfolio</span><span>About</span></span></nav>
+            <div class="stage"><div class="cover"></div><div class="peek-copy">Take a peek inside.</div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="night">
+        <header>
+          <h2>4 · 夜燈看稿</h2>
+          <span class="meta">灯箱 / 暗房</span>
+        </header>
+        <p class="why">深色工作室，作品像灯箱上的一张透明片。更戏剧、更展览。适合夜色、阴影重的插画。</p>
+        <div class="frame">
+          <div class="mini t-night">
+            <nav><span>STUDIO</span><span class="links"><span>WORKS</span><span>BOOKS</span><span>NOTE</span></span></nav>
+            <div class="stage"><div class="slide"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="cyan">
+        <header>
+          <h2>5 · 藍圖紙樣</h2>
+          <span class="meta">纸工程图纸</span>
+        </header>
+        <p class="why">晒图纸、虚线、图层编号。把立体书当成机关和结构来展示。适合她也在讲「怎么折、怎么站起来」。</p>
+        <div class="frame">
+          <div class="mini t-cyan">
+            <nav><span>POP-UP SPEC</span><span class="links"><span>PLAN</span><span>LAYER</span><span>NOTE</span></span></nav>
+            <div class="stage"><div class="fold"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="cut">
+        <header>
+          <h2>6 · 剪紙戲台</h2>
+          <span class="meta">民间纸层</span>
+        </header>
+        <p class="why">红、金、墨绿硬切边，像皮影和剪纸叠在一起。最热闹、最「纸」。适合色彩狠、轮廓清楚的作品。</p>
+        <div class="frame">
+          <div class="mini t-cut">
+            <nav><span>紙戲</span><span class="links"><span>画</span><span>书</span><span>人</span></span></nav>
+            <div class="stage"><i class="cut-a"></i><i class="cut-b"></i><i class="cut-c"></i></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+    </div>
+
+    <h2 class="section-label">从 MotionSites 里筛出的、适合艺术站的</h2>
+    <p class="section-note"><a href="https://motionsites.ai/">MotionSites</a> 大半是 SaaS、金融、中介站，那些不适合。下面五套是库里和「书 / 梦 / 层 / 门 / 编辑室」靠近的方向，我按插画+立体书改成预览，不是原样抄他们的付费模板。</p>
+
+    <div class="board">
+      <article class="choice" data-style="ms-book">
+        <header>
+          <h2>7 · 书即舞台</h2>
+          <span class="meta">近 Book Hero</span>
+        </header>
+        <p class="why">整页就是一本被照亮的书。最贴立体书，也最接近 Samantha 的「掀开看」。MotionSites 里和我们题材最近的一条。</p>
+        <div class="frame">
+          <div class="mini t-ms-book">
+            <nav><span>PAPER THEATRE</span><span class="links"><span>Books</span><span>Works</span></span></nav>
+            <div class="stage"><div class="tome"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="ms-dream">
+        <header>
+          <h2>8 · 梦核软光</h2>
+          <span class="meta">近 Dreamcore</span>
+        </header>
+        <p class="why">雾、粉紫、软焦点。艺术气息重，但容易抢过原作。适合她的画本身偏梦、偏空气，不适合硬边剪纸。</p>
+        <div class="frame">
+          <div class="mini t-ms-dream">
+            <nav><span>atelier</span><span class="links"><span>works</span><span>books</span></span></nav>
+            <div class="stage"><div class="orb"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="ms-story">
+        <header>
+          <h2>9 · 分层叙事</h2>
+          <span class="meta">近 3D Story / Layered Depth</span>
+        </header>
+        <p class="why">一层一层往前推，像翻立体书。动效会比现在这套更「网站」。适合想做滚动讲述、一页一个机关。</p>
+        <div class="frame">
+          <div class="mini t-ms-story">
+            <nav><span>STORY</span><span class="links"><span>I</span><span>II</span><span>III</span></span></nav>
+            <div class="stage"><i class="p1"></i><i class="p2"></i><i class="p3"></i></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="ms-gold">
+        <header>
+          <h2>10 · 金门掀开</h2>
+          <span class="meta">近 Golden Portal</span>
+        </header>
+        <p class="why">门、拱、金边，把「掀开」做成入口。华丽、展览感强。适合封面本身就有仪式感的立体书。</p>
+        <div class="frame">
+          <div class="mini t-ms-gold">
+            <nav><span>OPEN</span><span class="links"><span>ENTER</span><span>BOOKS</span></span></nav>
+            <div class="stage"><div class="arch"></div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+
+      <article class="choice" data-style="ms-ember">
+        <header>
+          <h2>11 · 编辑室大字</h2>
+          <span class="meta">近 EMBER.dsgn</span>
+        </header>
+        <p class="why">大标题、黑白、一点焦糖色。像设计工作室，不那么「童书」。适合作品要给出版社、品牌看的那一面。</p>
+        <div class="frame">
+          <div class="mini t-ms-ember">
+            <nav><span>EMBER</span><span class="links"><span>Work</span><span>Info</span></span></nav>
+            <div class="stage"><div class="big">纸会<br>站起来</div></div>
+            <div class="row"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <button class="pick" type="button">用这套</button>
+      </article>
+    </div>
+
+    <script>
+      document.querySelectorAll(".choice").forEach(function (card) {
+        card.querySelector(".pick").addEventListener("click", function () {
+          document.querySelectorAll(".choice").forEach(function (other) {
+            other.classList.remove("is-on");
+          });
+          card.classList.add("is-on");
+          var name = card.querySelector("h2").textContent;
+          card.querySelector(".pick").textContent = "已选 · 在对话里告诉我：" + name;
+        });
+      });
+    </script>
+  </body>
+</html>
