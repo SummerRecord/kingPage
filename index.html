@@ -4,69 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>插画与立体书</title>
-    <meta name="description" content="插画与立体书作品集。纸被切开、折起，一层一层叠进一个小舞台。">
+    <meta name="description" content="插画与立体书作品集。">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/site.css">
   </head>
   <body data-page="home">
-    <span class="crop crop-tl"></span>
-    <span class="crop crop-tr"></span>
-    <span class="crop crop-bl"></span>
-    <span class="crop crop-br"></span>
     <div class="wrap">
       <header class="site-header">
         <a class="brand" href="index.html">
-          <span class="seal">紙</span>
-          <span class="brand-text">
-            <span class="brand-name" data-brand-name></span>
-            <span class="brand-tag" data-brand-tag></span>
-          </span>
+          <span class="brand-name" data-brand-name></span>
+          <span class="brand-tag" data-brand-tag></span>
         </a>
         <nav class="nav" aria-label="主导航">
-          <a href="index.html">首页</a>
-          <a href="works.html">插画</a>
-          <a href="books.html">立体书</a>
-          <a href="about.html">关于</a>
-          <a href="contact.html">联系</a>
+          <a href="works.html">illustration</a>
+          <a href="books.html">books</a>
+          <a href="about.html">about</a>
+          <a href="contact.html">contact</a>
         </nav>
       </header>
 
-      <section class="hero" aria-label="立体书舞台">
-        <div class="stage" data-stage tabindex="0" role="button" aria-label="掀开这本书">
-          <div class="tome">
-            <div class="spine"></div>
-            <div class="cover-front"></div>
-            <div class="spread">
-              <div class="page page-left">点开封面，内页会自己站起来。</div>
-              <div class="page page-right">
-                <i class="pop-sky"></i>
-                <i class="pop-mid"></i>
-                <i class="pop-front"></i>
-              </div>
-            </div>
-          </div>
-          <span class="layer-tab">掀开 · Peek</span>
-          <div class="hero-copy">
-            <h1>纸会站起来。</h1>
-            <p>整页是一本被照亮的书。点一下封面，看它打开成跨页，立体机关从纸里站出来。</p>
-          </div>
+      <section class="feature" aria-label="Take a peek inside">
+        <div class="feature-art" data-stage tabindex="0" role="button" aria-label="Take a peek inside">
+          <div class="peek-plane tone-cinnabar" style="min-height:min(72vh,680px)"></div>
         </div>
+        <p class="feature-cap">Take a peek inside...</p>
       </section>
 
-      <section>
-        <div class="kicker">
-          <h2>选作</h2>
-          <span><a href="works.html">全部插画</a></span>
-        </div>
-        <div class="grid" data-works></div>
-      </section>
+      <div class="grid" data-works></div>
 
       <footer class="site-footer">
-        <span>Illustration · Pop-up · Paper theatre</span>
-        <span>把作品图放进 assets/ 后，在 js/config.js 填写路径</span>
+        <span>Copyright © 2026</span>
       </footer>
     </div>
     <script src="js/config.js"></script>

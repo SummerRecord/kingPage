@@ -8,7 +8,7 @@ window.SITE = {
   taglineEn: "Illustration & Pop-up Books",
   city: "中国",
   about:
-    "她画图，也做会站起来的书。纸被切开、折起，一层一层叠进一个小舞台。请把这段换成她自己的话，把姓名填进 js/config.js。",
+    "Hi! 她是插画师，也做立体书。更在意纸怎么被切开、折起，一层一层站起来。请把这段换成她自己的话。",
   aboutEn:
     "Illustration and paper-engineered books. Replace this paragraph with her own words in js/config.js.",
   works: [

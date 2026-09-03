@@ -3,67 +3,52 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>联系</title>
-    <meta name="description" content="约稿、出版、展览与合作。">
+    <title>contact</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/site.css">
   </head>
   <body data-page="contact">
-    <span class="crop crop-tl"></span>
-    <span class="crop crop-tr"></span>
-    <span class="crop crop-bl"></span>
-    <span class="crop crop-br"></span>
     <div class="wrap">
       <header class="site-header">
         <a class="brand" href="index.html">
-          <span class="seal">紙</span>
-          <span class="brand-text">
-            <span class="brand-name" data-brand-name></span>
-            <span class="brand-tag" data-brand-tag></span>
-          </span>
+          <span class="brand-name" data-brand-name></span>
+          <span class="brand-tag" data-brand-tag></span>
         </a>
         <nav class="nav" aria-label="主导航">
-          <a href="index.html">首页</a>
-          <a href="works.html">插画</a>
-          <a href="books.html">立体书</a>
-          <a href="about.html">关于</a>
-          <a href="contact.html">联系</a>
+          <a href="works.html">illustration</a>
+          <a href="books.html">books</a>
+          <a href="about.html">about</a>
+          <a href="contact.html">contact</a>
         </nav>
       </header>
 
-      <div class="kicker">
-        <h2>写信</h2>
-        <span>Contact</span>
-      </div>
       <div class="contact-block">
         <div class="prose">
           <p>约稿、出版、展览、工作坊，都可以从这里开始。</p>
-          <p>邮箱：<a data-email></a></p>
-          <p class="meta">表单会打开你的邮件应用，站点本身不保存内容。</p>
+          <p>Say hello -> <a data-email></a></p>
         </div>
         <form data-contact-form>
           <label class="field">
-            <span>你的名字</span>
+            <span>name</span>
             <input name="name" required autocomplete="name">
           </label>
           <label class="field">
-            <span>你的邮箱</span>
+            <span>email</span>
             <input name="reply" type="email" required autocomplete="email">
           </label>
           <label class="field">
-            <span>想说的事</span>
+            <span>message</span>
             <textarea name="message" rows="6" required></textarea>
           </label>
-          <button type="submit">写成一封信</button>
+          <button type="submit">send</button>
         </form>
       </div>
 
       <footer class="site-footer">
-        <span>Say hello</span>
-        <a href="index.html">回到首页</a>
+        <span>contact</span>
       </footer>
     </div>
     <script src="js/config.js"></script>

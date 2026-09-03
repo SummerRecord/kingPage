@@ -33,7 +33,10 @@
   const stage = document.querySelector("[data-stage]");
   if (stage) {
     const toggle = function () {
-      stage.classList.toggle("is-open");
+      const open = stage.classList.toggle("is-open");
+      stage.innerHTML = open
+        ? '<div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div>'
+        : '<div class="peek-plane tone-cinnabar" style="min-height:min(72vh,680px)"></div>';
     };
     stage.addEventListener("click", toggle);
     stage.addEventListener("keydown", function (event) {
@@ -86,9 +89,9 @@
           escapeHtml(book.title) +
           "</h3><p>" +
           escapeHtml(book.blurb) +
-          '</p><div class="peek" data-peek tabindex="0" role="button" aria-label="掀开内页">' +
+          '</p><div class="peek" data-peek tabindex="0" role="button" aria-label="Take a peek inside">' +
           '<div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div>' +
-          '</div><p class="meta">点击色块，模拟掀开内页</p></div></article>'
+          '</div><p class="meta">Take a peek inside...</p></div></article>'
         );
       })
       .join("");
