@@ -36,7 +36,7 @@
       const open = stage.classList.toggle("is-open");
       stage.innerHTML = open
         ? '<div class="peek-plane"></div><div class="peek-plane"></div><div class="peek-plane"></div>'
-        : '<div class="peek-plane tone-cinnabar" style="min-height:min(72vh,680px)"></div>';
+        : "";
     };
     stage.addEventListener("click", toggle);
     stage.addEventListener("keydown", function (event) {

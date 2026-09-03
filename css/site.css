@@ -1,9 +1,12 @@
 :root {
-  --bg: #ffffff;
-  --ink: #111111;
-  --muted: #6a6a6a;
-  --line: #e6e6e6;
-  --soft: #f4f1ea;
+  --bg: #f3ead8;
+  --ink: #2a2118;
+  --muted: #7a6a58;
+  --line: #d8cbb3;
+  --soft: #efe4cc;
+  --wash: #7ea0b0;
+  --leaf: #6f8a6a;
+  --clay: #c46a4a;
   --name: "Libre Baskerville", "Noto Serif SC", serif;
   --ui: "Karla", "Noto Sans SC", sans-serif;
 }
@@ -22,10 +25,29 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(196, 106, 74, 0.16), transparent 36%),
+    radial-gradient(ellipse at 88% 8%, rgba(126, 160, 176, 0.2), transparent 32%),
+    linear-gradient(180deg, #f7efdd 0%, var(--bg) 28%, #e8d7b4 100%);
   font-family: var(--ui);
   font-size: 16px;
   line-height: 1.7;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.14;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
 }
 
 .crop {
@@ -50,6 +72,8 @@ img {
 .wrap {
   width: min(1080px, calc(100% - 48px));
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .site-header {
@@ -112,10 +136,12 @@ img {
 
 .feature-art {
   min-height: min(72vh, 680px);
-  background: var(--soft);
+  background:
+    linear-gradient(180deg, #8fb4c4 0 38%, #6f8a6a 38% 62%, #c46a4a 62%);
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 18px 40px rgba(42, 33, 24, 0.12);
 }
 
 .feature-art.is-open {
@@ -202,12 +228,12 @@ img {
   object-fit: cover;
 }
 
-.tone-cinnabar { background: #c46a4a; }
-.tone-mat { background: #6f8a6a; }
-.tone-wash { background: #7ea0b0; }
-.tone-foil { background: #d2b56a; }
-.tone-ink { background: #4a4a4a; }
-.tone-paper { background: #e4d3b0; }
+.tone-cinnabar { background: linear-gradient(160deg, #d87a58, #c46a4a); }
+.tone-mat { background: linear-gradient(160deg, #86a07c, #6f8a6a); }
+.tone-wash { background: linear-gradient(160deg, #96b8c6, #7ea0b0); }
+.tone-foil { background: linear-gradient(160deg, #e0c47a, #d2b56a); }
+.tone-ink { background: linear-gradient(160deg, #5c5348, #3d362e); }
+.tone-paper { background: linear-gradient(160deg, #f0ddb8, #e4d3b0); }
 
 .card-meta {
   display: flex;
